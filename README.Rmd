@@ -98,9 +98,7 @@ deaths |> count(Time, Died)
 
 ### Include your answer
 
-Include at least one sentence discussing the result of your fact-checking endeavor.
-
-Upload your changes to the repository. Discuss and refine answers as a team.
+According to the results of the code I ran, there are 69 Avengers who died at least one time, which matches the number found on the website from the above question.
 
 
 ### Teammate name: Prudvik Seemakurthi
