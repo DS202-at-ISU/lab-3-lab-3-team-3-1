@@ -92,7 +92,6 @@ library(tidyverse)
     ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 
 ``` r
-library(tidyr)
 deaths <- av |> 
   pivot_longer(
     cols = starts_with('Death'),
@@ -101,13 +100,13 @@ deaths <- av |>
     )
 deaths$Time <- parse_number(deaths$Time)
 
-deaths <- deaths |> 
+returns <- av |> 
   pivot_longer(
     cols = starts_with('Return'),
     names_to = 'Return Number',
     values_to = 'Returned'
   )
-deaths$`Return Number` <- parse_number(deaths$`Return Number`)
+returns$`Return Number` <- parse_number(returns$`Return Number`)
 
 deaths |> count(Died)
 ```
@@ -115,9 +114,9 @@ deaths |> count(Died)
     ## # A tibble: 3 × 2
     ##   Died      n
     ##   <chr> <int>
-    ## 1 ""     3355
-    ## 2 "NO"    525
-    ## 3 "YES"   445
+    ## 1 ""      671
+    ## 2 "NO"    105
+    ## 3 "YES"    89
 
 ``` r
 deaths$URL |> unique() |> length()
@@ -126,12 +125,12 @@ deaths$URL |> unique() |> length()
     ## [1] 173
 
 ``` r
-445/173
+89/173
 ```
 
-    ## [1] 2.572254
+    ## [1] 0.5144509
 
-An Avengers suffers an average number of 2.572 deaths
+An Avengers suffers an average number of 0.51445 deaths
 
 ## Individually
 
@@ -172,6 +171,25 @@ team.
 
 Make sure to include the code to derive the (numeric) fact for the
 statement
+
+``` r
+deaths |> count(Time, Died)
+```
+
+    ## # A tibble: 11 × 3
+    ##     Time Died      n
+    ##    <dbl> <chr> <int>
+    ##  1     1 "NO"    104
+    ##  2     1 "YES"    69
+    ##  3     2 ""      156
+    ##  4     2 "NO"      1
+    ##  5     2 "YES"    16
+    ##  6     3 ""      171
+    ##  7     3 "YES"     2
+    ##  8     4 ""      172
+    ##  9     4 "YES"     1
+    ## 10     5 ""      172
+    ## 11     5 "YES"     1
 
 ### Include your answer
 
