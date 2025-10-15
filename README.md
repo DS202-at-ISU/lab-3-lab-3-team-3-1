@@ -83,9 +83,9 @@ library(tidyverse)
     ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
     ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-    ## ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+    ## ✔ ggplot2   4.0.0     ✔ tibble    3.2.1
     ## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-    ## ✔ purrr     1.1.0     
+    ## ✔ purrr     1.0.2     
     ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
@@ -146,7 +146,7 @@ possible.
 
 ### FiveThirtyEight Statement
 
-> Quote the statement you are planning to fact-check.
+> “I counted 89 total deaths.”
 
 ### Include the code
 
@@ -165,7 +165,8 @@ team.
 
 ### FiveThirtyEight Statement
 
-> Quote the statement you are planning to fact-check.
+> “Out of 173 listed Avengers, my analysis found that 69 had died at
+> least one time after they joined the team.”
 
 ### Include the code
 
@@ -184,7 +185,8 @@ team.
 
 ### FiveThirtyEight Statement
 
-> Quote the statement you are planning to fact-check.
+> “There’s a 2-in-3 chance that a member of the Avengers returned from
+> their first stint in the afterlife.”
 
 ### Include the code
 
@@ -199,11 +201,12 @@ fact-checking endeavor.
 Upload your changes to the repository. Discuss and refine answers as a
 team.
 
-### Teammate name:
+### Teammate name: Selena Cooper
 
 ### FiveThirtyEight Statement
 
-> Quote the statement you are planning to fact-check.
+> “but only a 50 percent chance they recovered from a second or third
+> death.”
 
 ### Include the code
 

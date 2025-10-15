@@ -71,7 +71,7 @@ Each team member picks one of the statements in the FiveThirtyEight [analysis](h
 ### Teammate name:
 ### FiveThirtyEight Statement
 
-> Quote the statement you are planning to fact-check.
+> "I counted 89 total deaths."
 
 ### Include the code
 
@@ -87,7 +87,7 @@ Upload your changes to the repository. Discuss and refine answers as a team.
 ### Teammate name:
 ### FiveThirtyEight Statement
 
-> Quote the statement you are planning to fact-check.
+> "Out of 173 listed Avengers, my analysis found that 69 had died at least one time after they joined the team."
 
 ### Include the code
 
@@ -103,7 +103,7 @@ Upload your changes to the repository. Discuss and refine answers as a team.
 ### Teammate name:
 ### FiveThirtyEight Statement
 
-> Quote the statement you are planning to fact-check.
+> "There’s a 2-in-3 chance that a member of the Avengers returned from their first stint in the afterlife."
 
 ### Include the code
 
@@ -116,10 +116,10 @@ Include at least one sentence discussing the result of your fact-checking endeav
 Upload your changes to the repository. Discuss and refine answers as a team.
 
 
-### Teammate name:
+### Teammate name: Selena Cooper
 ### FiveThirtyEight Statement
 
-> Quote the statement you are planning to fact-check.
+> "but only a 50 percent chance they recovered from a second or third death."
 
 ### Include the code
 
