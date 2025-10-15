@@ -1,4 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/LsTaLPbx)
 
 <!-- README.md is generated from README.Rmd. Please edit the README.Rmd file -->
 
@@ -77,6 +76,63 @@ Similarly, deal with the returns of characters.
 Based on these datasets calculate the average number of deaths an
 Avenger suffers.
 
+``` r
+library(tidyverse)
+```
+
+    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+    ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ## ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+    ## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+    ## ✔ purrr     1.1.0     
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ dplyr::filter() masks stats::filter()
+    ## ✖ dplyr::lag()    masks stats::lag()
+    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
+library(tidyr)
+deaths <- av |> 
+  pivot_longer(
+    cols = starts_with('Death'),
+    names_to = 'Time',
+    values_to = 'Died'
+    )
+deaths$Time <- parse_number(deaths$Time)
+
+deaths <- deaths |> 
+  pivot_longer(
+    cols = starts_with('Return'),
+    names_to = 'Return Number',
+    values_to = 'Returned'
+  )
+deaths$`Return Number` <- parse_number(deaths$`Return Number`)
+
+deaths |> count(Died)
+```
+
+    ## # A tibble: 3 × 2
+    ##   Died      n
+    ##   <chr> <int>
+    ## 1 ""     3355
+    ## 2 "NO"    525
+    ## 3 "YES"   445
+
+``` r
+deaths$URL |> unique() |> length()
+```
+
+    ## [1] 173
+
+``` r
+445/173
+```
+
+    ## [1] 2.572254
+
+An Avengers suffers an average number of 2.572 deaths
+
 ## Individually
 
 For each team member, copy this part of the report.
@@ -85,6 +141,65 @@ Each team member picks one of the statements in the FiveThirtyEight
 [analysis](https://fivethirtyeight.com/features/avengers-death-comics-age-of-ultron/)
 and fact checks it based on the data. Use dplyr functionality whenever
 possible.
+
+### Teammate name:
+
+### FiveThirtyEight Statement
+
+> Quote the statement you are planning to fact-check.
+
+### Include the code
+
+Make sure to include the code to derive the (numeric) fact for the
+statement
+
+### Include your answer
+
+Include at least one sentence discussing the result of your
+fact-checking endeavor.
+
+Upload your changes to the repository. Discuss and refine answers as a
+team.
+
+### Teammate name:
+
+### FiveThirtyEight Statement
+
+> Quote the statement you are planning to fact-check.
+
+### Include the code
+
+Make sure to include the code to derive the (numeric) fact for the
+statement
+
+### Include your answer
+
+Include at least one sentence discussing the result of your
+fact-checking endeavor.
+
+Upload your changes to the repository. Discuss and refine answers as a
+team.
+
+### Teammate name:
+
+### FiveThirtyEight Statement
+
+> Quote the statement you are planning to fact-check.
+
+### Include the code
+
+Make sure to include the code to derive the (numeric) fact for the
+statement
+
+### Include your answer
+
+Include at least one sentence discussing the result of your
+fact-checking endeavor.
+
+Upload your changes to the repository. Discuss and refine answers as a
+team.
+
+### Teammate name:
 
 ### FiveThirtyEight Statement
 
