@@ -210,13 +210,33 @@ team.
 
 ### Include the code
 
-Make sure to include the code to derive the (numeric) fact for the
-statement
+``` r
+recover2 <- deaths |> 
+  group_by(Name.Alias) |> 
+  summarize(
+    death_count = sum(Died == "YES"),
+    return_count = sum(Returned == "YES")
+  ) |>
+  filter(death_count >= 2) |> 
+  summarize(
+    total_case = n(),
+    recovered_from_2nd_or_3rd = sum(return_count >= 2),
+    no_recovery = total_case - recovered_from_2nd_or_3rd,
+    percent_recovered_2nd_or_3rd = recovered_from_2nd_or_3rd / total_case
+  )
+
+recover2
+```
+
+    ## # A tibble: 1 × 4
+    ##   total_case recovered_from_2nd_or_3rd no_recovery percent_recovered_2nd_or_3rd
+    ##        <int>                     <int>       <int>                        <dbl>
+    ## 1         64                        45          19                        0.703
 
 ### Include your answer
 
-Include at least one sentence discussing the result of your
-fact-checking endeavor.
-
-Upload your changes to the repository. Discuss and refine answers as a
-team.
+The claim states that only 50% of characters recover from a second or
+third death. Using the dataset, 45 out of 64 characters who died at
+least once recovered from a second or third death, giving an actual
+recovery rate of 70.3%. Therefore, the claim underestimates the true
+recovery rate, and is disproven by the data.
