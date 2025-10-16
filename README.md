@@ -82,7 +82,7 @@ library(tidyverse)
 
     ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-    ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ## ✔ forcats   1.0.1     ✔ stringr   1.5.1
     ## ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
     ## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
     ## ✔ purrr     1.1.0     
@@ -204,18 +204,43 @@ from the above question.
 > “There’s a 2-in-3 chance that a member of the Avengers returned from
 > their first stint in the afterlife.”
 
-### Include the code
+### Code:
 
-Make sure to include the code to derive the (numeric) fact for the
-statement
+``` r
+# Filter for first deaths and first returns
+first_deaths <- deaths %>%
+  filter(Time == 1, Died == "YES")
 
-### Include your answer
+first_returns <- returns %>%
+  filter(`Return Number` == 1, Returned == "YES")
 
-Include at least one sentence discussing the result of your
-fact-checking endeavor.
+# Merge the two filtered sets using URL
+merged <- first_deaths %>%
+  left_join(first_returns, by = "URL", suffix = c("_death", "_return"))
 
-Upload your changes to the repository. Discuss and refine answers as a
-team.
+# Compute totals and probability
+summary <- first_deaths %>%
+  summarise(
+    total_died = n(),
+    total_returned = sum(URL %in% first_returns$URL),
+    prob_returned = total_returned / total_died
+  )
+
+summary
+```
+
+    ## # A tibble: 1 × 3
+    ##   total_died total_returned prob_returned
+    ##        <int>          <int>         <dbl>
+    ## 1         69             46         0.667
+
+### Answer:
+
+After checking the Avengers data, I found that about two out of three
+heroes who died came back to life after their first death. This means
+the statement there’s a 2-in-3 chance that a member of the Avengers
+returned from their first stint in the afterlife is true based on the
+data.
 
 ### Teammate name: Selena Cooper
 
