@@ -82,17 +82,16 @@ library(tidyverse)
 
     ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-    ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-    ## ✔ ggplot2   4.0.0     ✔ tibble    3.2.1
+    ## ✔ forcats   1.0.1     ✔ stringr   1.5.1
+    ## ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
     ## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-    ## ✔ purrr     1.0.2     
+    ## ✔ purrr     1.1.0     
     ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
     ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 
 ``` r
-library(tidyr)
 deaths <- av |> 
   pivot_longer(
     cols = starts_with('Death'),
@@ -101,13 +100,13 @@ deaths <- av |>
     )
 deaths$Time <- parse_number(deaths$Time)
 
-deaths <- deaths |> 
+returns <- av |> 
   pivot_longer(
     cols = starts_with('Return'),
     names_to = 'Return Number',
     values_to = 'Returned'
   )
-deaths$`Return Number` <- parse_number(deaths$`Return Number`)
+returns$`Return Number` <- parse_number(returns$`Return Number`)
 
 deaths |> count(Died)
 ```
@@ -115,9 +114,9 @@ deaths |> count(Died)
     ## # A tibble: 3 × 2
     ##   Died      n
     ##   <chr> <int>
-    ## 1 ""     3355
-    ## 2 "NO"    525
-    ## 3 "YES"   445
+    ## 1 ""      671
+    ## 2 "NO"    105
+    ## 3 "YES"    89
 
 ``` r
 deaths$URL |> unique() |> length()
@@ -126,12 +125,12 @@ deaths$URL |> unique() |> length()
     ## [1] 173
 
 ``` r
-445/173
+89/173
 ```
 
-    ## [1] 2.572254
+    ## [1] 0.5144509
 
-An Avengers suffers an average number of 2.572 deaths
+An Avengers suffers an average number of 0.51445 deaths
 
 ## Individually
 
@@ -161,7 +160,7 @@ fact-checking endeavor.
 Upload your changes to the repository. Discuss and refine answers as a
 team.
 
-### Teammate name:
+### Teammate name: Nate Riedl
 
 ### FiveThirtyEight Statement
 
@@ -173,33 +172,75 @@ team.
 Make sure to include the code to derive the (numeric) fact for the
 statement
 
+``` r
+deaths |> count(Time, Died)
+```
+
+    ## # A tibble: 11 × 3
+    ##     Time Died      n
+    ##    <dbl> <chr> <int>
+    ##  1     1 "NO"    104
+    ##  2     1 "YES"    69
+    ##  3     2 ""      156
+    ##  4     2 "NO"      1
+    ##  5     2 "YES"    16
+    ##  6     3 ""      171
+    ##  7     3 "YES"     2
+    ##  8     4 ""      172
+    ##  9     4 "YES"     1
+    ## 10     5 ""      172
+    ## 11     5 "YES"     1
+
 ### Include your answer
 
-Include at least one sentence discussing the result of your
-fact-checking endeavor.
+According to the results of the code I ran, there are 69 Avengers who
+died at least one time, which matches the number found on the website
+from the above question.
 
-Upload your changes to the repository. Discuss and refine answers as a
-team.
-
-### Teammate name:
+### Teammate name: Prudvik Seemakurthi
 
 ### FiveThirtyEight Statement
 
 > “There’s a 2-in-3 chance that a member of the Avengers returned from
 > their first stint in the afterlife.”
 
-### Include the code
+### Code:
 
-Make sure to include the code to derive the (numeric) fact for the
-statement
+``` r
+# Filter for first deaths and first returns
+first_deaths <- deaths %>%
+  filter(Time == 1, Died == "YES")
 
-### Include your answer
+first_returns <- returns %>%
+  filter(`Return Number` == 1, Returned == "YES")
 
-Include at least one sentence discussing the result of your
-fact-checking endeavor.
+# Merge the two filtered sets using URL
+merged <- first_deaths %>%
+  left_join(first_returns, by = "URL", suffix = c("_death", "_return"))
 
-Upload your changes to the repository. Discuss and refine answers as a
-team.
+# Compute totals and probability
+summary <- first_deaths %>%
+  summarise(
+    total_died = n(),
+    total_returned = sum(URL %in% first_returns$URL),
+    prob_returned = total_returned / total_died
+  )
+
+summary
+```
+
+    ## # A tibble: 1 × 3
+    ##   total_died total_returned prob_returned
+    ##        <int>          <int>         <dbl>
+    ## 1         69             46         0.667
+
+### Answer:
+
+After checking the Avengers data, I found that about two out of three
+heroes who died came back to life after their first death. This means
+the statement there’s a 2-in-3 chance that a member of the Avengers
+returned from their first stint in the afterlife is true based on the
+data.
 
 ### Teammate name: Selena Cooper
 
